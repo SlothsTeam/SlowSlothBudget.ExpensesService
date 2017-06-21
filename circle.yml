@@ -1,0 +1,17 @@
+machine:
+  services:
+    - docker
+dependencies:
+  pre:
+    - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+    - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
+    - sudo apt-get update
+    - sudo apt-get install dotnet-dev-1.0.4
+  override:
+    - dotnet restore
+    - ./dockerbuild.sh
+test:
+  override:
+    - dotnet test ./test/SlowSlothBudget.ExpensesService.Tests
+    - docker run -d -p 8000:80 gcichosz/expenses-service
+    - curl --retry 10 --retry-delay 5 -v http://localhost:8000
