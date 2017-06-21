@@ -15,4 +15,4 @@ test:
   override:
     - dotnet test ./test/SlowSlothBudget.ExpensesService.Tests/SlowSlothBudget.ExpensesService.Tests.csproj
     - docker run -d -p 8000:80 gcichosz/expenses-service
-    - curl --retry 10 --retry-delay 5 -v http://localhost:8000
+    - curl --retry 10 --retry-delay 5 -v http://localhost:8000/api/values
