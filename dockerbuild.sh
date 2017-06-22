@@ -2,4 +2,4 @@
 dotnet publish ./src/SlowSlothBudget.ExpensesService -c Release -o out
 cp -r ./src/SlowSlothBudget.ExpensesService/out ./out
 docker info
-docker build -t gcichosz/slowslothbudget-expensesservice .
+docker build -t slothsgroup/slowslothbudget-expensesservice .
