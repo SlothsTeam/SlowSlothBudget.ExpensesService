@@ -14,11 +14,11 @@ dependencies:
 test:
   override:
     - dotnet test ./test/SlowSlothBudget.ExpensesService.Tests/SlowSlothBudget.ExpensesService.Tests.csproj
-    - docker run -d -p 8000:80 slothsgroup/slowslothbudget-expensesservice
+    - docker run -d -p 8000:80 slowsloth/slowslothbudget-expensesservice
     - curl --retry 10 --retry-delay 5 -v -f http://localhost:8000/api/values
 deployment:
   hub:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push slothsgroup/slowslothbudget-expensesservice
+      - docker push slowsloth/slowslothbudget-expensesservice
