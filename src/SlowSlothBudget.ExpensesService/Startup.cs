@@ -34,6 +34,11 @@ namespace SlowSlothBudget.ExpensesService
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => 
+                builder.WithOrigins($"{Configuration.GetValue("WEB_ENV_DOCKERCLOUD_CONTAINER_FQDN", "")}:{Configuration.GetValue("WEB_PORT_NUMBER", "80")}")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+
             app.UseMvc();
         }
     }
